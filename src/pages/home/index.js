@@ -1,7 +1,7 @@
 import React from 'react'
 import { HomeWrapper, Hero, Heading, Paragraph, Scroll, ScrollButton, ScrollText } from './HomeElements'
 import scrollBtn from '../../images/arrow-down.svg'
-import HowTo from '../../components/How-to'
+import DisplayCars from '../../components/DisplayCars'
 
 const Home = () => {
   return (
@@ -18,6 +18,7 @@ const Home = () => {
           <ScrollButton src={scrollBtn}/>
         </Scroll>
       </Hero>
+      <DisplayCars />
     </HomeWrapper>
   )
 }

@@ -49,7 +49,19 @@ const carSchema = new Schema ({
         type: String,
         required: true,
         trim: true,
-        minlength: 3
+    },
+    rating: {
+        type: Number,
+        trim: true,
+    },
+    ratedtimes: {
+        type: Number,
+        trim: true,
+    },
+    category: {
+        type: String,
+        trim: true,
+        required: true
     },
     ac: {
         type: Boolean,

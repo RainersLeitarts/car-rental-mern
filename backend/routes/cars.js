@@ -16,6 +16,7 @@ router.route('/add').post((req, res) => {
     const transmission = req.body.transmission
     const fuel = req.body.fuel
     const consumption = req.body.consumption
+    const category = req.body.category
     const ac = req.body.ac
     const available = req.body.available
     const images = req.body.images
@@ -30,6 +31,7 @@ router.route('/add').post((req, res) => {
         transmission,
         fuel,
         consumption,
+        category,
         ac,
         available,
         images
