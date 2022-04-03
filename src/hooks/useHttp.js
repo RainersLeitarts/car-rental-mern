@@ -5,7 +5,7 @@ const useHttp = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
-    const sendRequest = useCallback(async (requestConfig, callback = () => {}) => {
+    const sendRequest = useCallback(async (requestConfig, callback = () => { }) => {
         setLoading(false)
         setError(null)
 
@@ -15,6 +15,10 @@ const useHttp = () => {
             const response = await axios(requestConfig.url, {
                 method: requestConfig.method ? requestConfig.method : 'get',
                 data: requestConfig.data ? requestConfig.data : null,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
 
             const data = await response.data

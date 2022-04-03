@@ -12,8 +12,7 @@ const carSchema = new Schema ({
     model: {
         type: String,
         required: true,
-        trim: true,
-        minlength: 3
+        trim: true
     },
     year: {
         type: Number,
@@ -64,16 +63,16 @@ const carSchema = new Schema ({
         required: true
     },
     ac: {
-        type: Boolean,
+        type: String,
         required: true,
     },
     available: {
-        type: Boolean,
+        type: String,
         required: true,
     },
     images: {
         type: String,
-        //required: true,
+        required: true,
     }
 }, {
     timestamps: true

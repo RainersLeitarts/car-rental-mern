@@ -2,10 +2,8 @@ import styled from 'styled-components'
 import seats from '../../images/CarCardIcons/seats.svg'
 
 export const CardWrapper = styled.div`
-    //border: 1px solid black;
     border-radius: 5px;
     background-color: #bfbfbf;
-    //padding: 20px;
     display: grid;
     grid-template-rows: 1.5fr 2fr;
     row-gap: 0.5rem;
@@ -26,13 +24,12 @@ export const ImageContainer = styled.div`
     height: 100%;
     background-color: royalblue;
     border-radius: 5px;
-    background-image: url('https://autoplatform.lv/wp-content/uploads/thememakers/cardealer/2183/car/f5d99fd8e76e401711ea2adff2626377/_VzmpTiUEGnd.jpg');
+    background-image: url(${({image}) => image});
     background-position: center;
     background-size: cover;
 `
 
 export const BottomContainer = styled.div`
-    //background-color: purple;
     padding: 0 15px;
 `
 
@@ -43,11 +40,19 @@ export const Image = styled.img`
 export const BrandName = styled.h1`
     margin: 0;
     padding: 0;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 `
 
 export const ModelName = styled.h3`
     margin: 0;
     padding: 0;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 `
 
 export const SpecsContainer = styled.div`
@@ -61,7 +66,6 @@ export const SpecsContainer = styled.div`
 `
 
 export const SpecsItem = styled.div`
-    //background-color: orange;
     display: flex;
     align-items: center;
 `

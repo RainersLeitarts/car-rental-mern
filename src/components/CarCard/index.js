@@ -1,48 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CardWrapper, TopContainer, ImageContainer, Image, BottomContainer,
   BrandName, ModelName, SpecsContainer, SpecsItem, SpecsIcon, SpecsText } from './CarCardElements'
-import seats from '../../images/CarCardIcons/seats.svg'
-import doors from '../../images/CarCardIcons/doors.svg'
-import transmission from '../../images/CarCardIcons/transmission.svg'
-import fuel from '../../images/CarCardIcons/fuel.svg'
-import consumption from '../../images/CarCardIcons/consumption.svg'
-import ac from '../../images/CarCardIcons/ac.svg'
+import seatsIcon from '../../images/CarCardIcons/seats.svg'
+import doorsIcon from '../../images/CarCardIcons/doors.svg'
+import transmissionIcon from '../../images/CarCardIcons/transmission.svg'
+import fuelIcon from '../../images/CarCardIcons/fuel.svg'
+import consumptionIcon from '../../images/CarCardIcons/consumption.svg'
+import acIcon from '../../images/CarCardIcons/ac.svg'
 
-const CarCard = () => {
+
+const CarCard = ({make, model, seats, doors, transmission, fuel, consumption, ac, image}) => {
   return (
     <CardWrapper>
         <TopContainer>
-            <ImageContainer>
+            <ImageContainer image={image}>
                 <Image></Image>
             </ImageContainer>
         </TopContainer>
         <BottomContainer>
-            <BrandName>Volkswagen</BrandName>
-            <ModelName>Jetta</ModelName>
+            <BrandName>{make}</BrandName>
+            <ModelName>{model}</ModelName>
             <SpecsContainer>
                 <SpecsItem>
-                  <SpecsIcon img={seats}/>
-                  <SpecsText>4 seats</SpecsText>
+                  <SpecsIcon img={seatsIcon}/>
+                  <SpecsText>{seats} seats</SpecsText>
                 </SpecsItem>
                 <SpecsItem>
-                  <SpecsIcon img={doors}/>
-                  <SpecsText>Manual</SpecsText>
+                  <SpecsIcon img={doorsIcon}/>
+                  <SpecsText>{doors} doors</SpecsText>
                 </SpecsItem>
                 <SpecsItem>
-                  <SpecsIcon img={transmission}/>
-                  <SpecsText>Manual</SpecsText>
+                  <SpecsIcon img={transmissionIcon}/>
+                  <SpecsText>{transmission}</SpecsText>
                 </SpecsItem>
                 <SpecsItem>
-                  <SpecsIcon img={fuel}/>
-                  <SpecsText>Gasoline</SpecsText>
+                  <SpecsIcon img={fuelIcon}/>
+                  <SpecsText>{fuel}</SpecsText>
                 </SpecsItem>
                 <SpecsItem>
-                  <SpecsIcon img={consumption}/>
-                  <SpecsText>6L / 100km</SpecsText>
+                  <SpecsIcon img={consumptionIcon}/>
+                  <SpecsText>{consumption}</SpecsText>
                 </SpecsItem>
                 <SpecsItem>
-                  <SpecsIcon img={ac}/>
-                  <SpecsText>Yes</SpecsText>
+                  <SpecsIcon img={acIcon}/>
+                  <SpecsText>{ac}</SpecsText>
                 </SpecsItem>
             </SpecsContainer>
         </BottomContainer>
