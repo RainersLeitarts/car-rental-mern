@@ -24,16 +24,26 @@ export const Hero = styled.div`
 
 export const Heading = styled.h1`
     font-size: 70px;
+    text-align: center;
     color: #fff;
-    margin: 0;
+    margin: 0 20px;
     padding: 0;
     margin-top: 38vh;
     cursor: default;
+
+    @media screen and (max-width: 550px){
+        margin-top: 35vh;
+        line-height: 4rem;
+        font-size: 12vw;
+    }
 `
 
 export const Paragraph = styled.p`
     color: #fff;
     cursor: default;
+    text-align: center;
+    margin: 15px 20px;
+    line-height: 1.5rem;
 `   
 
 export const Scroll = styled(LinkS)`

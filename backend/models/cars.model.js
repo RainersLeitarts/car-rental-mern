@@ -66,6 +66,18 @@ const carSchema = new Schema ({
         type: String,
         required: true,
     },
+    dayprice: {
+        type: Number,
+        required: true,
+    },
+    weekprice: {
+        type: Number,
+        required: true,
+    },
+    monthprice: {
+        type: Number,
+        required: true,
+    },
     available: {
         type: String,
         required: true,

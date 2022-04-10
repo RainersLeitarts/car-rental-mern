@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 
 export const AddVehicleWrapper = styled.div`
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: auto;
     display: grid;
     align-items: center;
     justify-content: center;
     grid-template-columns: minmax(10rem, 35rem);
+    background-position: center center;
+    //background-attachment: fixed;
     background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(${({backgroundImage}) => backgroundImage});
 `
 

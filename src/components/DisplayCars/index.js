@@ -22,8 +22,9 @@ const DisplayCars = () => {
 
       </TopButtons>
       <CarsWrapper>
-        {cars?.map(({make, model, seats, doors, transmission, fuel, consumption, ac, images}, id) => {
-          return <CarCard key={id} make={make} model={model} seats={seats} doors={doors} transmission={transmission} fuel={fuel} consumption={consumption} ac={ac ? 'yes' : 'no'} image={images}/>
+        {cars?.map(({_id, make, model, seats, doors, transmission, fuel, consumption, ac, dayprice, weekprice, monthprice, images}, index) => {
+          return <CarCard key={index} vehicleId={_id} make={make} model={model} seats={seats} doors={doors} transmission={transmission} fuel={fuel} consumption={consumption}
+          ac={ac ? 'yes' : 'no'} image={images} dayprice={dayprice} weekprice={weekprice} monthprice={monthprice} />
         })}
       </CarsWrapper>
     </DisplayCarsWrapper>

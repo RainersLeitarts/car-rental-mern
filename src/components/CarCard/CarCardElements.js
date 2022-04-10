@@ -9,6 +9,8 @@ export const CardWrapper = styled.div`
     row-gap: 0.5rem;
     transition: all 0.5s;
 
+    position: relative;
+
     &:hover{
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
         transform: scale(1.03);
@@ -58,7 +60,7 @@ export const ModelName = styled.h3`
 export const SpecsContainer = styled.div`
     margin-top: .5rem;
     width: 100%;
-    height: 50%;
+    height: 45%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1.3rem 1.3rem 1.3rem;
@@ -81,5 +83,26 @@ export const SpecsIcon = styled.div`
 export const SpecsText = styled.p`
     font-weight: 600;
     font-size: 14px;
+`
+
+export const PriceButton = styled.button`
+    width: 95%;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+    height: 2.3rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #0077FF;
+    cursor: pointer;
+    color: #fff;
+    font-size: .9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+
+    &:hover{
+        opacity: 80%;
+    }
 `
 

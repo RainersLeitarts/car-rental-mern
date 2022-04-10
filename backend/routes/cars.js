@@ -18,6 +18,9 @@ router.route('/add').post((req, res) => {
     const consumption = req.body.consumption
     const category = req.body.category
     const ac = req.body.ac
+    const dayprice = req.body.dayprice
+    const weekprice = req.body.weekprice
+    const monthprice = req.body.monthprice
     const available = req.body.available
     const images = req.body.images
 
@@ -33,6 +36,9 @@ router.route('/add').post((req, res) => {
         consumption,
         category,
         ac,
+        dayprice,
+        weekprice,
+        monthprice,
         available,
         images
     })
@@ -67,8 +73,11 @@ router.route('/update/:id').post((req, res) => {
             car.transmission = body.transmission
             car.fuel = body.fuel
             car.consumption = body.consumption
-            car.ac = Boolean(body.ac)
-            car.available = Boolean(body.available)
+            car.ac = body.ac
+            car.dayprice = Number(body.dayprice)
+            car.weekprice = Number(body.weekprice)
+            car.monthprice = Number(body.monthprice)
+            car.available = body.available
             car.images = body.images
 
             car.save()

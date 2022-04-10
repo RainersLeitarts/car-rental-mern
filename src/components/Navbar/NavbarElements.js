@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { NavLink as L } from 'react-router-dom'
+import { css } from 'styled-components'
 
 export const NavWrapper = styled.div`
     position: fixed;
@@ -62,4 +63,63 @@ export const Link = styled(L)`
         color: #0077FF;
     }
 
+    @media screen and (max-width: 675px){
+        display: none;
+    }
+`
+
+export const HamburgerContainer = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    @media screen and (min-width: 676px){
+        display: none;
+    }
+`
+
+export const Hamburger = styled.div`
+    width: 30px;
+    height: 4px;
+    background: #fff;
+    border-radius: 3px;
+    transition: all 0.5s ease-in-out;
+    transform: translateX(0);
+
+    ${({open}) => open && css`
+        transform: translateX(-30px); 
+        background: transparent;
+    `}
+
+
+    &::before, &::after{
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 4px;
+        background: #fff;
+        border-radius: 3px;
+        transition: all 0.5s ease-in-out;
+    }
+
+    &::before{
+        transform: translateY(-11px);
+
+        ${({open}) => open && css`
+            transform: rotate(45deg) translate(21px, -21px); 
+        `}
+    }
+
+    &::after{
+        transform: translateY(11px);
+
+        ${({open}) => open && css`
+            transform: rotate(-45deg) translate(21px, 21px); 
+        `}
+    }
 `
