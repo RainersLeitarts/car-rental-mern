@@ -1,19 +1,12 @@
-import { createStore } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
+import loginReducer from './auth'
+import shownCarsReducer from './shownCars'
 
-
-const loginReducer = (state = {loggedIn: false}, action) => {
-    switch(action.type){
-        case 'setTrue':
-            return {
-                loggedIn: true
-            }
-        case 'setFalse':
-            return {
-                loggedIn: false
-            }
+const store = configureStore({
+    reducer: {
+        login: loginReducer,
+        shownCars: shownCarsReducer
     }
+})
 
-    return state
-}
-
-const store = createStore(loginReducer)
+export default store
