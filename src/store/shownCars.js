@@ -1,17 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialShownCarsState = {  }
+const initialShownCarsState = {shownCars: null}
 
 const shownCarsSlice = createSlice({
     name: 'shownCars',
     initialState: initialShownCarsState,
     reducers:{
         updateCars(state, action){
-            state.user = action.payload.user
-        },
-        setTrue(state, action) {
-            
-        },
+            state.shownCars = action.payload
+        }
     }
 })
 

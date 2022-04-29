@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 import useHttp from '../../hooks/useHttp'
 import CarCard from '../CarCard'
 import { DisplayCarsWrapper, TopButtons, CarsWrapper } from './DisplayCarsElements'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { shownCarsActions } from '../../store/shownCars'
 
 const DisplayCars = () => {
-
   const {loading, error, sendRequest: fetchCars} = useHttp()
-  const [cars, setCars] = useState(null)
+  const dispatch = useDispatch()
+  const shownCars = useSelector(state => state.shownCars.shownCars)
 
   useEffect(()=>{
     const getCars = (carsData) => {
-      setCars(carsData)
+      dispatch(shownCarsActions.updateCars(carsData))
     }
 
     fetchCars({url: 'http://127.0.0.1:5000/cars'}, getCars)
@@ -22,7 +25,7 @@ const DisplayCars = () => {
 
       </TopButtons>
       <CarsWrapper>
-        {cars?.map(({_id, make, model, seats, doors, transmission, fuel, consumption, ac, dayprice, weekprice, monthprice, images}, index) => {
+        {shownCars?.map(({_id, make, model, seats, doors, transmission, fuel, consumption, ac, dayprice, weekprice, monthprice, images}, index) => {
           return <CarCard key={index} vehicleId={_id} make={make} model={model} seats={seats} doors={doors} transmission={transmission} fuel={fuel} consumption={consumption}
           ac={ac ? 'yes' : 'no'} image={images} dayprice={dayprice} weekprice={weekprice} monthprice={monthprice} />
         })}

@@ -1,9 +1,10 @@
 import React from 'react'
 import { SliderContainer } from './SliderElements'
 
-const ImageSlider = () => {
+const ImageSlider = ({images}) => {
+  console.log(images)
   return (
-    <SliderContainer>
+    <SliderContainer images={images}>
 
     </SliderContainer>
   )
