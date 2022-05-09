@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import DatePicker from "react-datepicker";
 
 export const VehiclePageWrapper = styled.div`
     width: 100%;
@@ -72,6 +73,7 @@ export const Model = styled.h2`
 `
 
 export const Year = styled.h3`
+    color: gray;
     padding: 0;
     margin: 0;
 `
@@ -95,7 +97,7 @@ export const Specifications = styled.div`
 export const SpecsIcon = styled.div`
     width: 30%;
     height: 100%;
-    background-image: url(${({img}) => img});
+    background-image: url(${({ img }) => img});
     background-repeat: no-repeat;
     background-size: auto;
 `
@@ -126,4 +128,68 @@ export const SpecsContainer = styled.div`
 export const SpecsItem = styled.div`
     display: flex;
     align-items: center;
+`
+
+export const ReservationWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 230px;
+    width: 100%;
+    background-color: aliceblue;
+`
+
+export const ReservationRow = styled.div`
+    display: flex;
+    background-color: greenyellow;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: space-between;
+    padding: 10px 35px;
+`
+
+export const LocationInput = styled.select`
+    height: 30px;
+    width: 250px;
+    cursor: pointer;
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 5px;
+`
+
+export const ReservationColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+export const DateWrapperFlex = styled.div`
+    display: flex;
+`
+
+export const DatePickerWrapper = styled(({ className, ...props }) => (
+    <DatePicker {...props} wrapperClassName={className} />
+))`
+    width: auto;
+`
+
+export const DateColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+
+export const CustomDateInputButton = styled.input.attrs(props => ({ value: props.value }))`
+    height: 30px;
+    width: 140px;
+    margin: 0;
+    border: 1px solid gray;
+    border-radius: 5px;
+    text-align: center;
+`
+
+export const TimeInput = styled.input`
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    text-align: center;
 `
