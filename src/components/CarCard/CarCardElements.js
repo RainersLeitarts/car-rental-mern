@@ -65,6 +65,7 @@ export const SpecsContainer = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1.3rem 1.3rem 1.3rem;
     grid-gap: .9rem .5rem;
+    text-transform: capitalize;
 `
 
 export const SpecsItem = styled.div`

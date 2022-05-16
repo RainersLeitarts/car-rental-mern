@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { NavWrapper, NavContents, LogoWrapper, LinksWrapper, Link, Logo,
-HamburgerContainer, Hamburger} from './NavbarElements'
+import {
+  NavWrapper, NavContents, LogoWrapper, LinksWrapper, Link, Logo,
+  HamburgerContainer, Hamburger
+} from './NavbarElements'
 import logo from '../../images/logo.svg'
 import { useNavigate } from 'react-router-dom'
 //redux test
@@ -22,19 +24,12 @@ const Navbar = () => {
     //console.log(open)
   }
 
-  const loginHandler = () => {
-    dispatch(loginActions.setTrue({user: 'Test User'}))
-  } 
-
-  const logoutHandler = () => {
-    dispatch(loginActions.setFalse())
-  }
 
   return (
     <NavWrapper>
       <NavContents>
-        <LogoWrapper onClick={()=> navigate('/')}>
-          <Logo src={logo}/>
+        <LogoWrapper onClick={() => navigate('/')}>
+          <Logo src={logo} />
           CarRent
         </LogoWrapper>
         <LinksWrapper>
@@ -42,13 +37,9 @@ const Navbar = () => {
           <Link to='/'>About</Link>
           <Link to='/'>Contacts</Link>
           <Link to='/add_vehicle'>Add Vehicle</Link>
-          {isLoggedIn ? 
-            <Link to='/' onClick={logoutHandler}>Logout</Link>
-            :
-            <Link to='/' onClick={loginHandler}>Login</Link>
-          }
+          <Link to='/register'>Sign in</Link>
           <HamburgerContainer onClick={toggleOpen} open={open}>
-            <Hamburger open={open}/>
+            <Hamburger open={open} />
           </HamburgerContainer>
         </LinksWrapper>
       </NavContents>

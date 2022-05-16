@@ -2,10 +2,10 @@ import React, { forwardRef, useState } from 'react'
 import {
   VehiclePageWrapper, ContentWrapper, LeftCol, RightCol,
   LeftDescriptionWrapper, Make, Model, Year, Title, Specifications,
-  SpecsIcon, SpecsText, SpecsContainer, SpecsItem,
-  ReservationWrapper, ReservationRow, LocationInput,
+  SpecsIcon, SpecsText, SpecsContainer, SpecsItem, ReservationWrapper,
+  ReservationItemsWrapper, ReservationColumn, LocationInput,
   CustomDateInputButton, TimeInput, DatePickerWrapper,
-  DateWrapperFlex
+  DateWrapperFlex, ReservationLabel, ReservationHeading
 } from './SingleVehicleElements'
 import { useParams } from 'react-router-dom';
 import ImageSlider from '../../components/ImageSlider';
@@ -37,6 +37,11 @@ const SingleVehiclePage = () => {
 
     </CustomDateInputButton>
   ));
+
+  //Make it so that you cant get negative date
+  var difference = endDate.getTime() - startDate.getTime();
+  var reservationDays = Math.ceil(difference / (1000 * 3600 * 24));
+
 
   return (
     <VehiclePageWrapper>
@@ -79,42 +84,54 @@ const SingleVehiclePage = () => {
                 </SpecsItem>
               </SpecsContainer>
             </Specifications>
+            {reservationDays * vehicle.dayprice + '$'}
           </LeftDescriptionWrapper>
         </LeftCol>
         <RightCol>
           <ReservationWrapper>
-            <ReservationRow>
-              <LocationInput>
-                <option>Rīga, Pērnavas iela 7</option>
-              </LocationInput>
-              <DateWrapperFlex>
-                <DatePickerWrapper
-                  selected={startDate}
-                  onChange={(date: Date) => setStartDate(date)}
-                  customInput={<ExampleCustomInput />} />
-              </DateWrapperFlex>
-              <TimeField
-                value={startTime}                       // {String}   required, format '00:00' or '00:00:00'
-                onChange={(event, value) => { setStartTime(value) }}
-                input={<TimeInput />} // {Function} required
-              />
-            </ReservationRow>
-            <ReservationRow>
-              <LocationInput>
-                <option>Rīga, Pērnavas iela 7</option>
-              </LocationInput>
-              <DateWrapperFlex>
-              <DatePickerWrapper
-                selected={endDate}
-                onChange={(date: Date) => setEndDate(date)}
-                customInput={<ExampleCustomInput />} />
+          <ReservationHeading>Reservation options</ReservationHeading>
+            <ReservationItemsWrapper>
+              <ReservationColumn>
+                <ReservationLabel>Pick-up Location</ReservationLabel>
+                <LocationInput>
+                  <option>Rīga, Pērnavas iela 7</option>
+                </LocationInput>
+                <ReservationLabel>Return Location</ReservationLabel>
+                <LocationInput>
+                  <option>Rīga, Pērnavas iela 7</option>
+                </LocationInput>
+              </ReservationColumn>
+              <ReservationColumn>
+                <ReservationLabel>Pick-up Date</ReservationLabel>
+                <DateWrapperFlex>
+                  <DatePickerWrapper
+                    selected={startDate}
+                    onChange={(date: Date) => setStartDate(date)}
+                    customInput={<ExampleCustomInput />} />
                 </DateWrapperFlex>
-              <TimeField
-                value={endTime}                       // {String}   required, format '00:00' or '00:00:00'
-                onChange={(event, value) => { setEndTime(value) }}
-                input={<TimeInput />} // {Function} required
-              />
-            </ReservationRow>
+                <ReservationLabel>Return Date</ReservationLabel>
+                <DateWrapperFlex>
+                  <DatePickerWrapper
+                    selected={endDate}
+                    onChange={(date: Date) => setEndDate(date)}
+                    customInput={<ExampleCustomInput />} />
+                </DateWrapperFlex>
+              </ReservationColumn>
+              <ReservationColumn>
+                <ReservationLabel>Pick-up Time</ReservationLabel>
+                <TimeField
+                  value={startTime}                       // {String}   required, format '00:00' or '00:00:00'
+                  onChange={(event, value) => { setStartTime(value) }}
+                  input={<TimeInput />} // {Function} required
+                />
+                <ReservationLabel>Return Time</ReservationLabel>
+                <TimeField
+                  value={endTime}                       // {String}   required, format '00:00' or '00:00:00'
+                  onChange={(event, value) => { setEndTime(value) }}
+                  input={<TimeInput />} // {Function} required
+                />
+              </ReservationColumn>
+            </ReservationItemsWrapper>
           </ReservationWrapper>
         </RightCol>
       </ContentWrapper>

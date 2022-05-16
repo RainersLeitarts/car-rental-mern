@@ -46,7 +46,7 @@ export const RightCol = styled.div`
     flex-direction: column;
     width: 65%;
     height: 100%;
-    padding: 20px;
+    padding: 0 20px;
 
     @media screen and (max-width: 800px){
         width: 100%
@@ -57,6 +57,7 @@ export const LeftDescriptionWrapper = styled.div`
     background-color: cornflowerblue;
     height: 100%;
     padding: 1.5rem;
+    text-transform: capitalize;
 `
 
 export const Make = styled.h1`
@@ -133,24 +134,23 @@ export const SpecsItem = styled.div`
 export const ReservationWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    height: 230px;
-    width: 100%;
     background-color: aliceblue;
 `
 
-export const ReservationRow = styled.div`
+export const ReservationItemsWrapper = styled.div`
     display: flex;
-    background-color: greenyellow;
     width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    justify-content: space-between;
-    padding: 10px 35px;
+    //justify-content: space-between;
+    padding: 10px 0px 30px 0px;
+
+    @media screen and (max-width: 970px){
+        flex-direction: column;
+    }
 `
 
 export const LocationInput = styled.select`
     height: 30px;
-    width: 250px;
+    width: 100%;
     cursor: pointer;
     background-color: lightgray;
     border: 1px solid gray;
@@ -160,27 +160,31 @@ export const LocationInput = styled.select`
 export const ReservationColumn = styled.div`
     display: flex;
     flex-direction: column;
+    width: 33.3%;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
+
+    @media screen and (max-width: 970px){
+        width: 100%;
+    }
 `
 
 export const DateWrapperFlex = styled.div`
     display: flex;
+    width: 100%;
+    
 `
 
 export const DatePickerWrapper = styled(({ className, ...props }) => (
     <DatePicker {...props} wrapperClassName={className} />
 ))`
-    width: auto;
+    width: 100%;
 `
-
-export const DateColumn = styled.div`
-    display: flex;
-    flex-direction: column;
-`
-
 
 export const CustomDateInputButton = styled.input.attrs(props => ({ value: props.value }))`
     height: 30px;
-    width: 140px;
+    width: 100%;
     margin: 0;
     border: 1px solid gray;
     border-radius: 5px;
@@ -188,8 +192,20 @@ export const CustomDateInputButton = styled.input.attrs(props => ({ value: props
 `
 
 export const TimeInput = styled.input`
-    width: 100px;
+    width: 100%;
+    height: 30px;
     border-radius: 5px;
     border: 1px solid gray;
     text-align: center;
+`
+
+export const ReservationLabel = styled.label`
+    margin-top: 16px;
+`
+
+export const ReservationHeading = styled.h1`
+    margin: 0;
+    padding: 0;
+    margin-left: 23px;
+    margin-top: 23px;
 `
