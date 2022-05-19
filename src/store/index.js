@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import loginReducer from './auth'
+import userReducer from './user'
 import shownCarsReducer from './shownCars'
-import { persistStore, persistReducer } from 'redux-persist'
+import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk';
 
@@ -11,7 +11,7 @@ const persistConfig = {
 }
 
 const reducers = combineReducers({
-    login: loginReducer,
+    user: userReducer,
     shownCars: shownCarsReducer
 })
 

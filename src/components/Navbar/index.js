@@ -9,13 +9,9 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 
-import { loginActions } from '../../store/auth'
+import { userActions } from '../../store/user'
 
 const Navbar = () => {
-  //redux test
-  const dispatch = useDispatch()
-  const isLoggedIn = useSelector(state => state.login.loggedIn)
-
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
 
@@ -37,7 +33,7 @@ const Navbar = () => {
           <Link to='/'>About</Link>
           <Link to='/'>Contacts</Link>
           <Link to='/add_vehicle'>Add Vehicle</Link>
-          <Link to='/register'>Sign in</Link>
+          <Link to='/login'>Sign in</Link>
           <HamburgerContainer onClick={toggleOpen} open={open}>
             <Hamburger open={open} />
           </HamburgerContainer>

@@ -7,9 +7,8 @@ import { useSelector } from 'react-redux'
 
 const Home = () => {
   //redux test
-  const isLoggedIn = useSelector(state => state.login.loggedIn)
-  const user = useSelector(state => state.login.user)
-  console.log(isLoggedIn ? `${user} just logged in` : isLoggedIn)
+  const user = useSelector(state => state)
+ console.log(user)
 
   return (
     <HomeWrapper>
