@@ -32,12 +32,6 @@ const registerUser = asyncHandler(async (req, res) => {
     })
 
     if(user) {
-        // res.status(201).json({
-        //     _id: user.id,
-        //     email: user.name,
-        //     username: user.username,
-        //     token: generateToken(user._id)
-        // })
         res.status(201).json({
             message: 'User Created Successfuly!'
         })
@@ -56,14 +50,19 @@ const loginUser = asyncHandler(async (req, res) => {
 
     //check if password matches
     if(user && (await bcrypt.compare(password, user.password))){
+        const refreshToken = generateRefreshToken(user._id.toString())
+
+        User.updateOne({$set: {refreshToken}},{upsert: true}).then(res => {
+            console.log(res)
+        })
+
         res.status(201).json({
             _id: user.id,
-            name: user.name,
-            surname: user.surname,
-            email: user.email,
             username: user.username,
-            token: generateToken(user._id)
-        })
+            accessToken: generateAccessToken(user._id.toString())
+        }).cookie('jwt', refreshToken, {httpOnly: true, maxAge: 1000 * 1000})
+
+
     }else{
         res.status(400)
         throw new Error('Invalid credentials')
@@ -85,10 +84,19 @@ const test = asyncHandler(async (req, res) => {
     })
 })
 
-//Generate JWT
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
+//Generate Access Token
+const generateAccessToken = (id) => {
+    return jwt.sign({ id },
+        process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: '15s'
+    })
+}
+ 
+//Generate Refresh Token
+const generateRefreshToken = (id) => {
+    return jwt.sign({ id },
+        process.env.REFRESH_TOKEN_SECRET, {
+        expiresIn: '1000s'
     })
 }
 
