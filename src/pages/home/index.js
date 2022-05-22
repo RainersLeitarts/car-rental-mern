@@ -2,13 +2,8 @@ import React from 'react'
 import { HomeWrapper, Hero, Heading, Paragraph, Scroll, ScrollButton, ScrollText } from './HomeElements'
 import scrollBtn from '../../images/arrow-down.svg'
 import DisplayCars from '../../components/DisplayCars'
-//redux test
-import { useSelector } from 'react-redux'
 
 const Home = () => {
-  //redux test
-  const user = useSelector(state => state)
- console.log(user)
 
   return (
     <HomeWrapper>

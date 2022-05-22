@@ -11,6 +11,9 @@ const userSlice = createSlice({
         },
         removeUser(state) {
             state.user = {}
+        },
+        refreshAccessToken(state, action) {
+            state.user = {...state.user, accessToken: action.payload}
         }
     }
 })

@@ -4,16 +4,16 @@ const asyncHandler = require('express-async-handler')
 const User = require('../models/user.model')
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, surname, email, username, password} = req.body
+    const { name, surname, email, username, password } = req.body
 
-    if(!name || !surname || !email || !username || !password){
+    if (!name || !surname || !email || !username || !password) {
         res.status(400)
         throw new Error('Add all fields')
     }
 
-    const userExists = await User.findOne({email})
+    const userExists = await User.findOne({ email })
 
-    if(userExists) {
+    if (userExists) {
         res.status(400)
         throw new Error('This e-mail is already registered')
     }
@@ -31,11 +31,11 @@ const registerUser = asyncHandler(async (req, res) => {
         password: hashedPassword
     })
 
-    if(user) {
+    if (user) {
         res.status(201).json({
             message: 'User Created Successfuly!'
         })
-    }else{
+    } else {
         res.status(400)
         throw new Error('Invalid user data')
     }
@@ -43,45 +43,56 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const loginUser = asyncHandler(async (req, res) => {
-    const {username, password} = req.body
+    const { username, password } = req.body
 
     //check if user exists
-    const user = await User.findOne({username})
+    const user = await User.findOne({ username })
 
     //check if password matches
-    if(user && (await bcrypt.compare(password, user.password))){
+    if (user && (await bcrypt.compare(password, user.password))) {
         const refreshToken = generateRefreshToken(user._id.toString())
 
-        User.updateOne({$set: {refreshToken}},{upsert: true}).then(res => {
+        user.updateOne({ $set: { refreshToken } }, { upsert: true }).then(res => {
             console.log(res)
         })
 
+        res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 1000 * 100000 })
         res.status(201).json({
             _id: user.id,
             username: user.username,
+            role: user.role,
             accessToken: generateAccessToken(user._id.toString())
-        }).cookie('jwt', refreshToken, {httpOnly: true, maxAge: 1000 * 1000})
-
-
-    }else{
+        })
+    } else {
         res.status(400)
         throw new Error('Invalid credentials')
     }
 })
 
-const getMe = asyncHandler(async (req, res) => {
-    const {_id, username, email} = await User.findById(req.user.id)
-    res.status(200).json({
-        id: _id,
-        username,
-        email
+const logoutUser = asyncHandler(async (req, res) => {
+    //remember to delete accessToken on the front-end
+    const cookies = req.cookies
+    console.log(req)
+    if (!cookies?.jwt) return res.sendStatus(204)
+    const refreshToken = cookies.jwt
+
+    const foundUser = await User.findOne({ refreshToken })
+    if (!foundUser) {
+        res.clearCookie('jwt', { httpOnly: true, maxAge: 1000 * 100000 })
+        return res.sendStatus(204)
+    }
+
+    await foundUser.updateOne({ $set: { refreshToken: '' } }, { upsert: true }).then(res => {
+       
     })
+
+    res.clearCookie('jwt', { httpOnly: true, maxAge: 1000 * 100000 }) //use secure: true to serve only on https
+    res.send(204)
 })
 
-const test = asyncHandler(async (req, res) => {
-    res.status(201).json({
-        "Message": "test"
-    })
+const getMe = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id)
+    res.status(200).json(user)
 })
 
 //Generate Access Token
@@ -91,7 +102,7 @@ const generateAccessToken = (id) => {
         expiresIn: '15s'
     })
 }
- 
+
 //Generate Refresh Token
 const generateRefreshToken = (id) => {
     return jwt.sign({ id },
@@ -104,5 +115,5 @@ module.exports = {
     registerUser,
     loginUser,
     getMe,
-    test
+    logoutUser
 }

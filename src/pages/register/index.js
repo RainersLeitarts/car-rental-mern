@@ -43,7 +43,7 @@ const RegisterPage = () => {
       username: username,
       password : password
     }, {headers: {'Content-Type': 'application/json'}}).then(res => {
-      
+      console.log(res)
     }).finally(() => {
       navigator('/login')
     })

@@ -28,11 +28,12 @@ const LoginPage = () => {
     e.preventDefault()
 
     axios.post('http://127.0.0.1:5000/users/login', {
-      username: username,
-      password: password
-    }).then(res => {
-      dispatch(userActions.setUser({name: res.data.name, surname: res.data.surname, email: res.data.email,
-      username: res.data.username, token: res.data.token}))
+      "username": username,
+      "password": password
+    }, {withCredentials: true}).then(res => {
+      console.log(res.data)
+      dispatch(userActions.setUser({username: res.data.username, role: res.data.role, accessToken: res.data.accessToken}))
+      navigator('/')
     })
   }
 
@@ -42,7 +43,7 @@ const LoginPage = () => {
         <FormTitle>Login</FormTitle>
         <FormInput onChange={e => { inputHandler(e, 'username') }} placeholder="Username" />
         <FormInput onChange={e => { inputHandler(e, 'password') }} placeholder="Password" type="password" />
-        <FormButton>Login</FormButton>
+        <FormButton >Login</FormButton>
         <RegisterLink onClick={() => {navigator('/register')}}>Don't have an account yet?</RegisterLink>
       </FormWrapper>
     </RegisterWrapper>

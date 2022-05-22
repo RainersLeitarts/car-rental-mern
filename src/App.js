@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import AddVehicle from './pages/addVehicle';
 import Home from './pages/home';
 import LoginPage from './pages/login';
+import Me from './pages/me';
 import RegisterPage from './pages/register';
 import SingleVehiclePage from './pages/singleVehicle';
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='/vehicle/:id' element={<SingleVehiclePage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/me' element={<Me />} />
       </Routes>
     </Router>
   );
