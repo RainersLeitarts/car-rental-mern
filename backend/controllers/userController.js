@@ -53,7 +53,7 @@ const loginUser = asyncHandler(async (req, res) => {
         const refreshToken = generateRefreshToken(user._id.toString())
 
         user.updateOne({ $set: { refreshToken } }, { upsert: true }).then(res => {
-            console.log(res)
+
         })
 
         res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 1000 * 100000 })
@@ -72,7 +72,6 @@ const loginUser = asyncHandler(async (req, res) => {
 const logoutUser = asyncHandler(async (req, res) => {
     //remember to delete accessToken on the front-end
     const cookies = req.cookies
-    console.log(req)
     if (!cookies?.jwt) return res.sendStatus(204)
     const refreshToken = cookies.jwt
 

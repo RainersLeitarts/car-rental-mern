@@ -1,8 +1,7 @@
 const router = require('express').Router()
-let User = require('../models/user.model')
 const { registerUser, loginUser, getMe, logoutUser } = require('../controllers/userController')
 const { handleRefreshToken } = require('../controllers/refreshTokenController')
-const { protect, verifyJWT } = require('../middleware/authMiddleware')
+const { verifyJWT } = require('../middleware/authMiddleware')
 
 router.post('/', registerUser)
 router.get('/refresh', handleRefreshToken)

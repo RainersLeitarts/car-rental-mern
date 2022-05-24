@@ -21,9 +21,11 @@ connection.once('open', () => {
 
 const carsRouter = require('./routes/cars')
 const usersRouter = require('./routes/users')
+const reservationsRouter = require('./routes/reservations')
 
 app.use('/cars', carsRouter)
 app.use('/users', usersRouter)
+app.use('/reservations', reservationsRouter)
 app.use('*', (req, res) => res.status(404).json({"Message": "404"}))
 
 
