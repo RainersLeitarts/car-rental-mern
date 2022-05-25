@@ -54,6 +54,27 @@ const getByUserId = asyncHandler(async (req, res) => {
 
 })
 
+const changeReservationStatus = asyncHandler(async (req, res) => {
+    const { userId } = req.body
+
+    if (!userId) {
+        res.status(400)
+        throw new Error('No UserID provided')
+    }
+
+    const reservations = await Reservation.find({userId: userId.toString()})
+
+    if (reservations) {
+        res.status(201).json({
+            reservations: reservations
+        })
+    } else {
+        res.status(400)
+        throw new Error('Failed')
+    }
+
+})
+
 module.exports = {
     createReservation,
     getByUserId

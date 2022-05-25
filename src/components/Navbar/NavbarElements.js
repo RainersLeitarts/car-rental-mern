@@ -63,7 +63,7 @@ export const Link = styled(L)`
         color: #0077FF;
     }
 
-    @media screen and (max-width: 675px){
+    @media screen and (max-width: 720px){
         display: none;
     }
 `
@@ -78,7 +78,7 @@ export const HamburgerContainer = styled.div`
     cursor: pointer;
     transition: all 0.5s ease-in-out;
 
-    @media screen and (min-width: 676px){
+    @media screen and (min-width: 720px){
         display: none;
     }
 `

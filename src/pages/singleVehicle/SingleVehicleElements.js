@@ -4,8 +4,6 @@ import DatePicker from "react-datepicker";
 export const VehiclePageWrapper = styled.div`
     width: 100%;
     height: 100vh;
-    background-color: #dfdfdf;
-
     display: flex;
     justify-content: center;
     transition: all 0.5s;
@@ -25,11 +23,11 @@ export const ContentWrapper = styled.div`
         flex-direction: column;
         margin-left: 0;
         margin-right: 0;
+        margin-top: 80px;
     }
 `
 
 export const LeftCol = styled.div`
-    background-color: aliceblue;
     //height: 100%;
     width: 35%;
     display: flex;
@@ -41,7 +39,7 @@ export const LeftCol = styled.div`
 `
 
 export const RightCol = styled.div`
-    background-color: antiquewhite;
+    background-color: angratiquewhite;
     display: flex;
     flex-direction: column;
     width: 65%;
@@ -54,10 +52,16 @@ export const RightCol = styled.div`
 `
 
 export const LeftDescriptionWrapper = styled.div`
-    background-color: cornflowerblue;
+    background-color: aliceblue;
     height: 100%;
     padding: 1.5rem;
     text-transform: capitalize;
+    border-radius: 0 5px;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 600px){
+        margin: 0 20px 20px 20px;
+    }
 `
 
 export const Make = styled.h1`
@@ -135,6 +139,7 @@ export const ReservationWrapper = styled.div`
     display: flex;
     flex-direction: column;
     background-color: aliceblue;
+    margin-bottom: 10px;
 `
 
 export const ReservationItemsWrapper = styled.div`
@@ -142,6 +147,7 @@ export const ReservationItemsWrapper = styled.div`
     width: 100%;
     //justify-content: space-between;
     padding: 10px 0px 30px 0px;
+    
 
     @media screen and (max-width: 970px){
         flex-direction: column;
@@ -152,9 +158,10 @@ export const LocationInput = styled.select`
     height: 30px;
     width: 100%;
     cursor: pointer;
-    background-color: lightgray;
-    border: 1px solid gray;
+    background-color: #0077FF;
+    border: 3px #0077FF;
     border-radius: 5px;
+    color: white;
 `
 
 export const ReservationColumn = styled.div`
@@ -186,16 +193,17 @@ export const CustomDateInputButton = styled.input.attrs(props => ({ value: props
     height: 30px;
     width: 100%;
     margin: 0;
-    border: 1px solid gray;
+    border: 1px solid #0077FF;
     border-radius: 5px;
     text-align: center;
+    cursor: pointer;
 `
 
 export const TimeInput = styled.input`
     width: 100%;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid gray;
+    border: 1px solid #0077FF;
     text-align: center;
 `
 
@@ -208,4 +216,49 @@ export const ReservationHeading = styled.h1`
     padding: 0;
     margin-left: 23px;
     margin-top: 23px;
+`
+
+export const InsuranceOptions = styled.div`
+    display: grid;
+    margin: 0px 20px;
+    grid-template-columns: 50fr 50fr;
+    grid-template-rows: 2;
+    width: 100fr;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+    
+    @media screen and (max-width: 970px){
+        grid-template-columns: 1fr;
+    }
+`
+
+export const InsuranceOption = styled.div`
+    width: 100%;
+    height: 90px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #0077FF;
+    cursor: pointer;
+    transition: all 0.5s;
+    
+    &:hover{
+        background-color: #0077FF;
+    }
+
+    @media screen and (max-width: 800px){
+        height: 65px;
+    }
+`
+
+export const InsuranceOptionText = styled.p`
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
 `

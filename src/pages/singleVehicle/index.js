@@ -5,7 +5,8 @@ import {
   SpecsIcon, SpecsText, SpecsContainer, SpecsItem, ReservationWrapper,
   ReservationItemsWrapper, ReservationColumn, LocationInput,
   CustomDateInputButton, TimeInput, DatePickerWrapper,
-  DateWrapperFlex, ReservationLabel, ReservationHeading
+  DateWrapperFlex, ReservationLabel, ReservationHeading,
+  InsuranceOptions, InsuranceOption, InsuranceOptionText
 } from './SingleVehicleElements'
 import { useParams } from 'react-router-dom';
 import ImageSlider from '../../components/ImageSlider';
@@ -89,7 +90,7 @@ const SingleVehiclePage = () => {
         </LeftCol>
         <RightCol>
           <ReservationWrapper>
-          <ReservationHeading>Reservation options</ReservationHeading>
+            <ReservationHeading>Reservation options</ReservationHeading>
             <ReservationItemsWrapper>
               <ReservationColumn>
                 <ReservationLabel>Pick-up Location</ReservationLabel>
@@ -99,6 +100,10 @@ const SingleVehiclePage = () => {
                 <ReservationLabel>Return Location</ReservationLabel>
                 <LocationInput>
                   <option>Rīga, Pērnavas iela 7</option>
+                  <option>Rīga, Pērnavas iela 7</option>
+                  <option>Rīga, Pērnavas iela 7</option>
+                  <option>Rīga, Pērnavas iela 7</option>
+                  <option>Rīga, Pērnavas iela 7</option>
                 </LocationInput>
               </ReservationColumn>
               <ReservationColumn>
@@ -107,11 +112,18 @@ const SingleVehiclePage = () => {
                   <DatePickerWrapper
                     selected={startDate}
                     onChange={(date: Date) => setStartDate(date)}
+                    startDate={startDate}
+                    endDate={endDate}
+                    selectsStart
                     customInput={<ExampleCustomInput />} />
                 </DateWrapperFlex>
                 <ReservationLabel>Return Date</ReservationLabel>
                 <DateWrapperFlex>
                   <DatePickerWrapper
+                    selectsEnd
+                    startDate={startDate}
+                    endDate={endDate}
+                    minDate={startDate}
                     selected={endDate}
                     onChange={(date: Date) => setEndDate(date)}
                     customInput={<ExampleCustomInput />} />
@@ -132,6 +144,48 @@ const SingleVehiclePage = () => {
                 />
               </ReservationColumn>
             </ReservationItemsWrapper>
+          </ReservationWrapper>
+          <ReservationWrapper>
+            <ReservationItemsWrapper>
+              <ReservationHeading>Insurance options</ReservationHeading>
+            </ReservationItemsWrapper>
+            <InsuranceOptions>
+              <InsuranceOption>
+                <InsuranceOptionText>Basic Package</InsuranceOptionText>
+                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}>Basically useless</p>
+              </InsuranceOption>
+              <InsuranceOption>
+                <InsuranceOptionText>Extra safety</InsuranceOptionText>
+                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}>50% discount on your first crash</p>
+              </InsuranceOption>
+              <InsuranceOption>
+                <InsuranceOptionText>Premium package</InsuranceOptionText>
+                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}>Probably costs more than the rent</p>
+              </InsuranceOption>
+              <InsuranceOption>
+                <InsuranceOptionText>I NEVER crash</InsuranceOptionText>
+                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}>Trust me bro</p>
+              </InsuranceOption>
+            </InsuranceOptions>
+          </ReservationWrapper>
+          <ReservationWrapper>
+            <ReservationItemsWrapper>
+              <ReservationHeading>Trip distance</ReservationHeading>
+            </ReservationItemsWrapper>
+            <InsuranceOptions>
+              <InsuranceOption>
+                <InsuranceOptionText>100 km/day</InsuranceOptionText>
+              </InsuranceOption>
+              <InsuranceOption>
+                <InsuranceOptionText>200 km/day</InsuranceOptionText>
+              </InsuranceOption>
+              <InsuranceOption>
+                <InsuranceOptionText>500 km/day</InsuranceOptionText>
+              </InsuranceOption>
+              <InsuranceOption>
+                <InsuranceOptionText>Ulimited</InsuranceOptionText>
+              </InsuranceOption>
+            </InsuranceOptions>
           </ReservationWrapper>
         </RightCol>
       </ContentWrapper>
