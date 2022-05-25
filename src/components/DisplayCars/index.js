@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useHttp from '../../hooks/useHttp'
 import CarCard from '../CarCard'
-import { DisplayCarsWrapper, TopButtons, CarsWrapper } from './DisplayCarsElements'
+import { DisplayCarsWrapper, TopButtons, CarsWrapper, TopCarsTitle } from './DisplayCarsElements'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { shownCarsActions } from '../../store/shownCars'
@@ -21,6 +21,7 @@ const DisplayCars = () => {
 
   return (
     <DisplayCarsWrapper>
+      <TopCarsTitle>Our Top Rentals</TopCarsTitle>
       <TopButtons>
 
       </TopButtons>

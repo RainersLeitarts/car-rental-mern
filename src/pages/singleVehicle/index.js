@@ -6,7 +6,8 @@ import {
   ReservationItemsWrapper, ReservationColumn, LocationInput,
   CustomDateInputButton, TimeInput, DatePickerWrapper,
   DateWrapperFlex, ReservationLabel, ReservationHeading,
-  InsuranceOptions, InsuranceOption, InsuranceOptionText
+  InsuranceOptions, InsuranceOption, InsuranceOptionText,
+  InsuranceOptionSmallText
 } from './SingleVehicleElements'
 import { useParams } from 'react-router-dom';
 import ImageSlider from '../../components/ImageSlider';
@@ -33,6 +34,9 @@ const SingleVehiclePage = () => {
   const [startTime, setStartTime] = useState('08:00');
   const [endTime, setEndTime] = useState('08:00');
 
+  const [activeDistanceOption, setActiveDistanceOption] = useState(1)
+  const [activeInsuranceOption, setActiveInsuranceOption] = useState(1)
+
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <CustomDateInputButton value={value} className="example-custom-input" onClick={onClick} ref={ref}>
 
@@ -43,6 +47,41 @@ const SingleVehiclePage = () => {
   var difference = endDate.getTime() - startDate.getTime();
   var reservationDays = Math.ceil(difference / (1000 * 3600 * 24));
 
+  const changeActiveOption = (type, option) =>{
+    if(type === 'trip'){
+      switch(option){
+        case 1:
+          setActiveDistanceOption(1)
+          break
+        case 2:
+          setActiveDistanceOption(2)
+          break
+        case 3:
+          setActiveDistanceOption(3)
+          break
+        case 4:
+          setActiveDistanceOption(4)
+          break
+      }
+    }else if(type === 'insurance'){
+      switch(option){
+        case 1:
+          setActiveInsuranceOption(1)
+          break
+        case 2:
+          setActiveInsuranceOption(2)
+          break
+        case 3:
+          setActiveInsuranceOption(3)
+          break
+        case 4:
+          setActiveInsuranceOption(4)
+          break
+      }
+    }
+
+    
+  }
 
   return (
     <VehiclePageWrapper>
@@ -150,21 +189,25 @@ const SingleVehiclePage = () => {
               <ReservationHeading>Insurance options</ReservationHeading>
             </ReservationItemsWrapper>
             <InsuranceOptions>
-              <InsuranceOption>
+              <InsuranceOption onClick={(e) => {changeActiveOption('insurance', 1)}} active={activeInsuranceOption === 1 ? true : false}>
                 <InsuranceOptionText>Basic Package</InsuranceOptionText>
-                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}>Basically useless</p>
+                <InsuranceOptionSmallText>Basically useless</InsuranceOptionSmallText>
+                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}></p>
               </InsuranceOption>
-              <InsuranceOption>
+              <InsuranceOption onClick={(e) => {changeActiveOption('insurance', 2)}} active={activeInsuranceOption === 2 ? true : false}>
                 <InsuranceOptionText>Extra safety</InsuranceOptionText>
-                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}>50% discount on your first crash</p>
+                <InsuranceOptionSmallText>50% discount on your first crash</InsuranceOptionSmallText>
+                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}></p>
               </InsuranceOption>
-              <InsuranceOption>
+              <InsuranceOption onClick={(e) => {changeActiveOption('insurance', 3)}} active={activeInsuranceOption === 3 ? true : false}>
                 <InsuranceOptionText>Premium package</InsuranceOptionText>
-                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}>Probably costs more than the rent</p>
+                <InsuranceOptionSmallText>Probably costs more than the rent</InsuranceOptionSmallText>
+                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}></p>
               </InsuranceOption>
-              <InsuranceOption>
+              <InsuranceOption onClick={(e) => {changeActiveOption('insurance', 4)}} active={activeInsuranceOption === 4 ? true : false}>
                 <InsuranceOptionText>I NEVER crash</InsuranceOptionText>
-                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}>Trust me bro</p>
+                <InsuranceOptionSmallText>Trust me bro</InsuranceOptionSmallText>
+                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px', transition: 'all 0.5s'}}></p>
               </InsuranceOption>
             </InsuranceOptions>
           </ReservationWrapper>
@@ -173,17 +216,17 @@ const SingleVehiclePage = () => {
               <ReservationHeading>Trip distance</ReservationHeading>
             </ReservationItemsWrapper>
             <InsuranceOptions>
-              <InsuranceOption>
+              <InsuranceOption onClick={(e) => {changeActiveOption('trip', 1)}} active={activeDistanceOption === 1 ? true : false}>
                 <InsuranceOptionText>100 km/day</InsuranceOptionText>
               </InsuranceOption>
-              <InsuranceOption>
+              <InsuranceOption onClick={(e) => {changeActiveOption('trip', 2)}} active={activeDistanceOption === 2 ? true : false}>
                 <InsuranceOptionText>200 km/day</InsuranceOptionText>
               </InsuranceOption>
-              <InsuranceOption>
+              <InsuranceOption onClick={(e) => {changeActiveOption('trip', 3)}} active={activeDistanceOption === 3 ? true : false}>
                 <InsuranceOptionText>500 km/day</InsuranceOptionText>
               </InsuranceOption>
-              <InsuranceOption>
-                <InsuranceOptionText>Ulimited</InsuranceOptionText>
+              <InsuranceOption onClick={(e) => {changeActiveOption('trip', 4)}} active={activeDistanceOption === 4 ? true : false}>
+                <InsuranceOptionText>Unlimited</InsuranceOptionText>
               </InsuranceOption>
             </InsuranceOptions>
           </ReservationWrapper>

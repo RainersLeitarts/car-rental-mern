@@ -246,9 +246,19 @@ export const InsuranceOption = styled.div`
     border: 3px solid #0077FF;
     cursor: pointer;
     transition: all 0.5s;
+
+    background-color: ${props => props.active ? '#0077FF' : 'transparent'};
     
+    & *{
+        color: ${props => props.active ? 'white' : 'black'};
+    }
+
     &:hover{
         background-color: #0077FF;
+    }
+
+    &:hover *{
+        color: white;
     }
 
     @media screen and (max-width: 800px){
@@ -261,4 +271,14 @@ export const InsuranceOptionText = styled.p`
     font-size: 20px;
     margin: 0;
     padding: 0;
+    transition: all 0.3s;
+    //color: ${props => props.active ? 'white' : 'black'};
+`
+
+export const InsuranceOptionSmallText = styled.p`
+    padding: 0;
+    margin: 0;
+    font-size: 9px;
+    line-height: 5px;
+    transition: all 0.3s;
 `
