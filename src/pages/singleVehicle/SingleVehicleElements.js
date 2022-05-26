@@ -12,6 +12,7 @@ export const VehiclePageWrapper = styled.div`
 export const ContentWrapper = styled.div`
     max-width: 1200px;
     margin-top: 110px;
+    margin-bottom: 110px;
     margin-left: 2rem;
     margin-right: 2rem;
     width: 100%;
@@ -39,7 +40,7 @@ export const LeftCol = styled.div`
 `
 
 export const RightCol = styled.div`
-    background-color: angratiquewhite;
+    //background-color: angratiquewhite;
     display: flex;
     flex-direction: column;
     width: 65%;
@@ -49,18 +50,21 @@ export const RightCol = styled.div`
     @media screen and (max-width: 800px){
         width: 100%
     }
+
+    @media screen and (max-width: 600px){
+        padding: 0;
+    }
 `
 
 export const LeftDescriptionWrapper = styled.div`
     background-color: aliceblue;
-    height: 100%;
-    padding: 1.5rem;
+    padding: 1.2rem 1.5rem;
     text-transform: capitalize;
     border-radius: 0 5px;
     margin-bottom: 20px;
 
     @media screen and (max-width: 600px){
-        margin: 0 20px 20px 20px;
+        //margin: 0 20px 20px 20px;
     }
 `
 
@@ -93,7 +97,7 @@ export const Title = styled.div`
 `
 export const Specifications = styled.div`
     width: 100%;
-    height: 200px;
+    margin-bottom: 40px;
     //background-color: beige;
     display: flex;
     justify-content: center;
@@ -139,7 +143,7 @@ export const ReservationWrapper = styled.div`
     display: flex;
     flex-direction: column;
     background-color: aliceblue;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 `
 
 export const ReservationItemsWrapper = styled.div`
@@ -215,7 +219,7 @@ export const ReservationHeading = styled.h1`
     margin: 0;
     padding: 0;
     margin-left: 23px;
-    margin-top: 23px;
+    margin-top: 20px;
 `
 
 export const InsuranceOptions = styled.div`
@@ -282,3 +286,50 @@ export const InsuranceOptionSmallText = styled.p`
     line-height: 5px;
     transition: all 0.3s;
 `
+
+export const ExtrasContainer = styled.div`
+    margin: 0 20px;
+    padding: 0;
+
+    @media screen and (max-width: 1050px){
+        margin: 0;
+    }
+`
+
+export const ExtrasTitle = styled.p`
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 8px;
+`
+
+export const ExtrasValue = styled.p`
+    line-height: 1px;
+    margin-bottom: 30px;
+`
+
+export const TotalPrice = styled.p`
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1px;
+    margin-bottom: 30px;
+    margin-top: 50px;
+    color: #0077FF;
+    
+    @media screen and (max-width: 615px){
+        font-size: 30px;
+    }
+`
+
+export const RentButton = styled.button`
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    color: white;
+    margin-top: 10px;
+    background-color: #0077FF;
+    border: 3px solid #0077FF;
+    cursor: pointer;
+    border-radius: 5px;
+`
+
+//add scroll to top button when max-width 600px

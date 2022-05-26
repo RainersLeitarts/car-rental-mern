@@ -7,9 +7,10 @@ import {
   CustomDateInputButton, TimeInput, DatePickerWrapper,
   DateWrapperFlex, ReservationLabel, ReservationHeading,
   InsuranceOptions, InsuranceOption, InsuranceOptionText,
-  InsuranceOptionSmallText
+  InsuranceOptionSmallText, ExtrasContainer, ExtrasTitle, ExtrasValue,
+  TotalPrice, RentButton
 } from './SingleVehicleElements'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ImageSlider from '../../components/ImageSlider';
 import { useSelector } from 'react-redux'
 import seatsIcon from '../../images/CarCardIcons/seats.svg'
@@ -27,18 +28,18 @@ import TimeField from 'react-simple-timefield';
 
 const SingleVehiclePage = () => {
   let { id } = useParams();
+  const navigator = useNavigate()
   const vehicle = useSelector(state => state.shownCars.shownCars).find(veh => veh._id == id)
+  const isLoggedIn = useSelector(state => state.user.user.accessToken)
 
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(setMinimumDays(startDate, 2));
   const [startTime, setStartTime] = useState('08:00');
   const [endTime, setEndTime] = useState('08:00');
 
-  const [activeDistanceOption, setActiveDistanceOption] = useState(1)
-  const [activeInsuranceOption, setActiveInsuranceOption] = useState(1)
-
+  //empty onChange() because otherwise value causes error
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-    <CustomDateInputButton value={value} className="example-custom-input" onClick={onClick} ref={ref}>
+    <CustomDateInputButton value={value} onChange={() => { }} className="example-custom-input" onClick={onClick} ref={ref}>
 
     </CustomDateInputButton>
   ));
@@ -47,40 +48,71 @@ const SingleVehiclePage = () => {
   var difference = endDate.getTime() - startDate.getTime();
   var reservationDays = Math.ceil(difference / (1000 * 3600 * 24));
 
-  const changeActiveOption = (type, option) =>{
-    if(type === 'trip'){
-      switch(option){
+  function setMinimumDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
+  const safetyPayment = 200
+
+  const tripOptions = {
+    1: { option: 1, optionName: '100 km/day', price: 5 },
+    2: { option: 2, optionName: '200 km/day', price: 7 },
+    3: { option: 3, optionName: '500 km/day', price: 13 },
+    4: { option: 4, optionName: 'Unlimited', price: 15 },
+  }
+
+  const insuranceOptions = {
+    1: { option: 1, optionName: 'Basic Package', price: 20 },
+    2: { option: 2, optionName: 'Extra Safety', price: 35 },
+    3: { option: 3, optionName: 'Premium Package', price: 120 },
+    4: { option: 4, optionName: 'I NEVER crash', price: 0 },
+  }
+
+  const [activeDistanceOption, setActiveDistanceOption] = useState(tripOptions[1])
+  const [activeInsuranceOption, setActiveInsuranceOption] = useState(insuranceOptions[1])
+
+
+  const changeActiveOption = (type, option) => {
+    if (type === 'trip') {
+      //console.log(e.target.children[0]?.innerText)
+      switch (option) {
         case 1:
-          setActiveDistanceOption(1)
+          setActiveDistanceOption(tripOptions[1])
           break
         case 2:
-          setActiveDistanceOption(2)
+          setActiveDistanceOption(tripOptions[2])
           break
         case 3:
-          setActiveDistanceOption(3)
+          setActiveDistanceOption(tripOptions[3])
           break
         case 4:
-          setActiveDistanceOption(4)
+          setActiveDistanceOption(tripOptions[4])
           break
       }
-    }else if(type === 'insurance'){
-      switch(option){
+    } else if (type === 'insurance') {
+      switch (option) {
         case 1:
-          setActiveInsuranceOption(1)
+          setActiveInsuranceOption(insuranceOptions[1])
           break
         case 2:
-          setActiveInsuranceOption(2)
+          setActiveInsuranceOption(insuranceOptions[2])
           break
         case 3:
-          setActiveInsuranceOption(3)
+          setActiveInsuranceOption(insuranceOptions[3])
           break
         case 4:
-          setActiveInsuranceOption(4)
+          setActiveInsuranceOption(insuranceOptions[4])
           break
       }
     }
+  }
 
-    
+  const rentNowHandler = () => {
+    if(!isLoggedIn){
+      navigator('/login')
+    }
   }
 
   return (
@@ -124,7 +156,21 @@ const SingleVehiclePage = () => {
                 </SpecsItem>
               </SpecsContainer>
             </Specifications>
-            {reservationDays * vehicle.dayprice + '$'}
+            <ExtrasContainer>
+              <ExtrasTitle>Safety Payment: ${safetyPayment}</ExtrasTitle>
+              <ExtrasValue>{'$' + vehicle.dayprice + '/day X ' + reservationDays}</ExtrasValue>
+              <ExtrasTitle>Vehicle rent: ${vehicle.dayprice * reservationDays}</ExtrasTitle>
+              <ExtrasValue>{'$' + vehicle.dayprice + '/day X ' + reservationDays}</ExtrasValue>
+              <ExtrasTitle>Insurance: ${activeInsuranceOption.price}</ExtrasTitle>
+              <ExtrasValue>{activeInsuranceOption.optionName}</ExtrasValue>
+              <ExtrasTitle>Trip distance: ${activeDistanceOption.price}</ExtrasTitle>
+              <ExtrasValue>{activeDistanceOption.optionName}</ExtrasValue>
+              <TotalPrice>Total: ${activeInsuranceOption.price + activeDistanceOption.price + safetyPayment + (vehicle.dayprice * reservationDays)}</TotalPrice>
+              <RentButton onClick={rentNowHandler}>Rent Now</RentButton>
+            </ExtrasContainer>
+
+
+
           </LeftDescriptionWrapper>
         </LeftCol>
         <RightCol>
@@ -150,7 +196,7 @@ const SingleVehiclePage = () => {
                 <DateWrapperFlex>
                   <DatePickerWrapper
                     selected={startDate}
-                    onChange={(date: Date) => setStartDate(date)}
+                    onChange={(date: Date) => { setStartDate(date) }}
                     startDate={startDate}
                     endDate={endDate}
                     selectsStart
@@ -162,7 +208,7 @@ const SingleVehiclePage = () => {
                     selectsEnd
                     startDate={startDate}
                     endDate={endDate}
-                    minDate={startDate}
+                    minDate={setMinimumDays(startDate, 2)}
                     selected={endDate}
                     onChange={(date: Date) => setEndDate(date)}
                     customInput={<ExampleCustomInput />} />
@@ -189,25 +235,25 @@ const SingleVehiclePage = () => {
               <ReservationHeading>Insurance options</ReservationHeading>
             </ReservationItemsWrapper>
             <InsuranceOptions>
-              <InsuranceOption onClick={(e) => {changeActiveOption('insurance', 1)}} active={activeInsuranceOption === 1 ? true : false}>
+              <InsuranceOption onClick={(e) => { changeActiveOption('insurance', 1) }} active={activeInsuranceOption.option === 1 ? true : false}>
                 <InsuranceOptionText>Basic Package</InsuranceOptionText>
                 <InsuranceOptionSmallText>Basically useless</InsuranceOptionSmallText>
-                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}></p>
+                <p style={{ padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px' }}></p>
               </InsuranceOption>
-              <InsuranceOption onClick={(e) => {changeActiveOption('insurance', 2)}} active={activeInsuranceOption === 2 ? true : false}>
+              <InsuranceOption onClick={(e) => { changeActiveOption('insurance', 2) }} active={activeInsuranceOption.option === 2 ? true : false}>
                 <InsuranceOptionText>Extra safety</InsuranceOptionText>
                 <InsuranceOptionSmallText>50% discount on your first crash</InsuranceOptionSmallText>
-                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}></p>
+                <p style={{ padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px' }}></p>
               </InsuranceOption>
-              <InsuranceOption onClick={(e) => {changeActiveOption('insurance', 3)}} active={activeInsuranceOption === 3 ? true : false}>
+              <InsuranceOption onClick={(e) => { changeActiveOption('insurance', 3) }} active={activeInsuranceOption.option === 3 ? true : false}>
                 <InsuranceOptionText>Premium package</InsuranceOptionText>
                 <InsuranceOptionSmallText>Probably costs more than the rent</InsuranceOptionSmallText>
-                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px'}}></p>
+                <p style={{ padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px' }}></p>
               </InsuranceOption>
-              <InsuranceOption onClick={(e) => {changeActiveOption('insurance', 4)}} active={activeInsuranceOption === 4 ? true : false}>
+              <InsuranceOption onClick={(e) => { changeActiveOption('insurance', 4) }} active={activeInsuranceOption.option === 4 ? true : false}>
                 <InsuranceOptionText>I NEVER crash</InsuranceOptionText>
                 <InsuranceOptionSmallText>Trust me bro</InsuranceOptionSmallText>
-                <p style={{padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px', transition: 'all 0.5s'}}></p>
+                <p style={{ padding: 0, margin: 0, fontSize: '9px', lineHeight: '5px', transition: 'all 0.5s' }}></p>
               </InsuranceOption>
             </InsuranceOptions>
           </ReservationWrapper>
@@ -216,16 +262,16 @@ const SingleVehiclePage = () => {
               <ReservationHeading>Trip distance</ReservationHeading>
             </ReservationItemsWrapper>
             <InsuranceOptions>
-              <InsuranceOption onClick={(e) => {changeActiveOption('trip', 1)}} active={activeDistanceOption === 1 ? true : false}>
+              <InsuranceOption onClick={(e) => { changeActiveOption('trip', 1) }} active={activeDistanceOption.option === 1 ? true : false}>
                 <InsuranceOptionText>100 km/day</InsuranceOptionText>
               </InsuranceOption>
-              <InsuranceOption onClick={(e) => {changeActiveOption('trip', 2)}} active={activeDistanceOption === 2 ? true : false}>
+              <InsuranceOption onClick={(e) => { changeActiveOption('trip', 2) }} active={activeDistanceOption.option === 2 ? true : false}>
                 <InsuranceOptionText>200 km/day</InsuranceOptionText>
               </InsuranceOption>
-              <InsuranceOption onClick={(e) => {changeActiveOption('trip', 3)}} active={activeDistanceOption === 3 ? true : false}>
+              <InsuranceOption onClick={(e) => { changeActiveOption('trip', 3) }} active={activeDistanceOption.option === 3 ? true : false}>
                 <InsuranceOptionText>500 km/day</InsuranceOptionText>
               </InsuranceOption>
-              <InsuranceOption onClick={(e) => {changeActiveOption('trip', 4)}} active={activeDistanceOption === 4 ? true : false}>
+              <InsuranceOption onClick={(e) => { changeActiveOption('trip', 4) }} active={activeDistanceOption.option === 4 ? true : false}>
                 <InsuranceOptionText>Unlimited</InsuranceOptionText>
               </InsuranceOption>
             </InsuranceOptions>
