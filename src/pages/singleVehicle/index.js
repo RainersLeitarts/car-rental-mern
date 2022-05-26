@@ -158,7 +158,7 @@ const SingleVehiclePage = () => {
             </Specifications>
             <ExtrasContainer>
               <ExtrasTitle>Safety Payment: ${safetyPayment}</ExtrasTitle>
-              <ExtrasValue>{'$' + vehicle.dayprice + '/day X ' + reservationDays}</ExtrasValue>
+              <ExtrasValue>This will be returned</ExtrasValue>
               <ExtrasTitle>Vehicle rent: ${vehicle.dayprice * reservationDays}</ExtrasTitle>
               <ExtrasValue>{'$' + vehicle.dayprice + '/day X ' + reservationDays}</ExtrasValue>
               <ExtrasTitle>Insurance: ${activeInsuranceOption.price}</ExtrasTitle>
