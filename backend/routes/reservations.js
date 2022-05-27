@@ -4,7 +4,7 @@ const { protect, verifyJWT } = require('../middleware/authMiddleware')
 const { createReservation, getByUserId } = require('../controllers/reservationController')
 
 router.post('/create', verifyJWT, createReservation)
-router.get('/myReservations', verifyJWT, getByUserId)
+router.post('/myReservations', verifyJWT, getByUserId)
 
 
 module.exports = router

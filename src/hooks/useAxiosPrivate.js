@@ -4,6 +4,8 @@ import { axiosPrivate } from '../api/axios'
 import useRefreshToken from './useRefreshToken'
 
 const useAxiosPrivate = () => {
+    //implement loading state
+
     const refresh = useRefreshToken()
     const accessToken = useSelector(state => state.user.user.accessToken)
 

@@ -6,19 +6,24 @@ import {
 } from './MeElements'
 import MeNavigationComponent from './MeNavigation'
 import MyAccount from './MyAccount'
+import MyReservations from './MyReservations'
 
 const Me = () => {
   const [shownSection, setShownSection] = useState('myAccount')
   const axiosPrivate = useAxiosPrivate()
 
-  
+  const handleSectionChange = (section) => {
+    setShownSection(section)
+  }  
 
   return (
     <MeWrapper>
       <MeContent>
-        <MeNavigationComponent />
+        <MeNavigationComponent sectionSwitch={handleSectionChange}/>
         <MeContentColumn>
-          <MyAccount />
+          {shownSection === 'myAccount' && <MyAccount />}
+          {shownSection === 'myReservations' && <MyReservations />}
+          
         </MeContentColumn>
       </MeContent>
     </MeWrapper>

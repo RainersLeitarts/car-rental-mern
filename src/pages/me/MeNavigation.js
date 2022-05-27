@@ -4,15 +4,17 @@ import {
     MeNavigationItemText
 } from './MeElements'
 
-const MeNavigationComponent = () => {
+const MeNavigationComponent = ({sectionSwitch}) => {
+
+
     return (
         <MeNavigation>
-            <MeNavigationItem>
+            <MeNavigationItem onClick={() => sectionSwitch('myAccount')}>
                 <MeNavigationItemText>
                     My Account
                 </MeNavigationItemText>
             </MeNavigationItem>
-            <MeNavigationItem>
+            <MeNavigationItem onClick={() => sectionSwitch('myReservations')}>
                 <MeNavigationItemText>
                     My Reservations
                 </MeNavigationItemText>
