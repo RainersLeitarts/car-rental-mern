@@ -22,20 +22,26 @@ import acIcon from '../../images/CarCardIcons/ac.svg'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import useAxiosPrivate from '../../hooks/useAxiosPrivate'
+
 //timepicker
 
 import TimeField from 'react-simple-timefield';
+import axios from 'axios';
 
 const SingleVehiclePage = () => {
   let { id } = useParams();
   const navigator = useNavigate()
   const vehicle = useSelector(state => state.shownCars.shownCars).find(veh => veh._id == id)
   const isLoggedIn = useSelector(state => state.user.user.accessToken)
+  const userId = useSelector(state => state.user.user.id)
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(setMinimumDays(startDate, 2));
   const [startTime, setStartTime] = useState('08:00');
   const [endTime, setEndTime] = useState('08:00');
+
+  const axiosPrivate = useAxiosPrivate()
 
   //empty onChange() because otherwise value causes error
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
@@ -46,15 +52,13 @@ const SingleVehiclePage = () => {
 
   //Make it so that you cant get negative date
   var difference = endDate.getTime() - startDate.getTime();
-  var reservationDays = Math.ceil(difference / (1000 * 3600 * 24));
+  var reservationDays = Math.ceil(difference / (1000 * 3600 * 24)) + 1;
 
   function setMinimumDays(date, days) {
     var result = new Date(date);
     result.setDate(result.getDate() + days);
     return result;
   }
-
-  const safetyPayment = 200
 
   const tripOptions = {
     1: { option: 1, optionName: '100 km/day', price: 5 },
@@ -72,6 +76,8 @@ const SingleVehiclePage = () => {
 
   const [activeDistanceOption, setActiveDistanceOption] = useState(tripOptions[1])
   const [activeInsuranceOption, setActiveInsuranceOption] = useState(insuranceOptions[1])
+
+
 
 
   const changeActiveOption = (type, option) => {
@@ -110,10 +116,33 @@ const SingleVehiclePage = () => {
   }
 
   const rentNowHandler = () => {
-    if(!isLoggedIn){
+    if (!isLoggedIn) {
       navigator('/login')
+    } else {
+      axiosPrivate.post('http://127.0.0.1:5000/reservations/create', {
+        "vehicleId": vehicle._id,
+        "userId": userId,
+        "startDate": startDate.toDateString(),
+        "endDate": endDate.toDateString(),
+        "paymentStatus": "processing",
+        "paymentAmmount": activeInsuranceOption.price + activeDistanceOption.price + vehicle.safetyprice + (vehicle.dayprice * reservationDays),
+        "reservationStatus": "active"
+      }, { withCredentials: true }).then(res => {
+        console.log(res.data)
+      })
     }
   }
+
+
+  const handleStartDateChange = (newDate) => {
+    if (newDate > setMinimumDays(endDate, -2)) {
+      setStartDate(newDate)
+      setEndDate(setMinimumDays(newDate, 2))
+    }else{
+      setStartDate(newDate)
+    }
+  }
+
 
   return (
     <VehiclePageWrapper>
@@ -157,7 +186,7 @@ const SingleVehiclePage = () => {
               </SpecsContainer>
             </Specifications>
             <ExtrasContainer>
-              <ExtrasTitle>Safety Payment: ${safetyPayment}</ExtrasTitle>
+              <ExtrasTitle>Safety Payment: ${vehicle.safetyprice}</ExtrasTitle>
               <ExtrasValue>This will be returned</ExtrasValue>
               <ExtrasTitle>Vehicle rent: ${vehicle.dayprice * reservationDays}</ExtrasTitle>
               <ExtrasValue>{'$' + vehicle.dayprice + '/day X ' + reservationDays}</ExtrasValue>
@@ -165,11 +194,9 @@ const SingleVehiclePage = () => {
               <ExtrasValue>{activeInsuranceOption.optionName}</ExtrasValue>
               <ExtrasTitle>Trip distance: ${activeDistanceOption.price}</ExtrasTitle>
               <ExtrasValue>{activeDistanceOption.optionName}</ExtrasValue>
-              <TotalPrice>Total: ${activeInsuranceOption.price + activeDistanceOption.price + safetyPayment + (vehicle.dayprice * reservationDays)}</TotalPrice>
+              <TotalPrice>Total: ${activeInsuranceOption.price + activeDistanceOption.price + vehicle.safetyprice + (vehicle.dayprice * reservationDays)}</TotalPrice>
               <RentButton onClick={rentNowHandler}>Rent Now</RentButton>
             </ExtrasContainer>
-
-
 
           </LeftDescriptionWrapper>
         </LeftCol>
@@ -196,7 +223,7 @@ const SingleVehiclePage = () => {
                 <DateWrapperFlex>
                   <DatePickerWrapper
                     selected={startDate}
-                    onChange={(date: Date) => { setStartDate(date) }}
+                    onChange={(date: Date) => { handleStartDateChange(date) }}
                     startDate={startDate}
                     endDate={endDate}
                     selectsStart

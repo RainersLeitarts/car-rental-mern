@@ -32,7 +32,7 @@ const LoginPage = () => {
       "password": password
     }, {withCredentials: true}).then(res => {
       console.log(res.data)
-      dispatch(userActions.setUser({username: res.data.username, role: res.data.role, accessToken: res.data.accessToken}))
+      dispatch(userActions.setUser({id: res.data._id, username: res.data.username, role: res.data.role, accessToken: res.data.accessToken}))
       navigator('/')
     })
   }
