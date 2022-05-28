@@ -4,17 +4,16 @@ import {
     MeNavigationItemText
 } from './MeElements'
 
-const MeNavigationComponent = ({sectionSwitch}) => {
-
+const MeNavigationComponent = ({shownSection, sectionSwitch}) => {
 
     return (
         <MeNavigation>
-            <MeNavigationItem onClick={() => sectionSwitch('myAccount')}>
+            <MeNavigationItem active={shownSection === 'myAccount'? true : false} onClick={() => sectionSwitch('myAccount')}>
                 <MeNavigationItemText>
                     My Account
                 </MeNavigationItemText>
             </MeNavigationItem>
-            <MeNavigationItem onClick={() => sectionSwitch('myReservations')}>
+            <MeNavigationItem active={shownSection === 'myReservations'? true : false} onClick={() => sectionSwitch('myReservations')}>
                 <MeNavigationItemText>
                     My Reservations
                 </MeNavigationItemText>

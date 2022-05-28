@@ -17,7 +17,7 @@ const MyReservations = () => {
                 const response = await axiosPrivate.post('/reservations/myReservations',
                     {
                         userId: userId
-                    } )
+                    })
                 console.log(response.data)
                 isMounted && setReservations(response.data)
             } catch (error) {
@@ -35,7 +35,7 @@ const MyReservations = () => {
 
     return (
         <div>{reservations?.reservations?.map((reservation, key) => {
-            return <div>{key+1 + ': ' +reservation._id}</div>
+            return <div>{key + 1 + ': ' + reservation._id}</div>
         })}</div>
     )
 }

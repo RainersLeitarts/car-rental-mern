@@ -19,7 +19,7 @@ const Me = () => {
   return (
     <MeWrapper>
       <MeContent>
-        <MeNavigationComponent sectionSwitch={handleSectionChange}/>
+        <MeNavigationComponent shownSection={shownSection} sectionSwitch={handleSectionChange}/>
         <MeContentColumn>
           {shownSection === 'myAccount' && <MyAccount />}
           {shownSection === 'myReservations' && <MyReservations />}

@@ -46,11 +46,18 @@ export const MeNavigationItem = styled.div`
     font-weight: 600;
     border-radius: 5px;
     margin-bottom: 2px;
+    background-color: ${props => props.active ? '#0077FF' : 'transparent'};
     cursor: pointer;
+    transition: all 0.5s;
+
+    & *{
+        color: ${props => props.active ? 'white' : 'black'};
+    }
 `
 
 export const MeNavigationItemText = styled.p`
     margin: 0;
+    transition: all 0.3s;
 `
 
 export const MeContentColumn = styled.div`
