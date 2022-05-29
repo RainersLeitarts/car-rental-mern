@@ -8,6 +8,26 @@ const reservationsSchema = new Schema ({
         required: true,
         trim: true,
     },
+    vehicleMake: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    vehicleModel: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    vehicleYear: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    vehicleImage: {
+        type: String,
+        required: true,
+        trim: true,
+    },
     userId: {
         type: String,
         required: true,

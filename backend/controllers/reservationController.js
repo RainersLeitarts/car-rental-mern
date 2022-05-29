@@ -3,11 +3,15 @@ const asyncHandler = require('express-async-handler')
 const Reservation = require('../models/reservations.model')
 
 const createReservation = asyncHandler(async (req, res) => {
-    const { userId, vehicleId, startDate, endDate,
-        paymentStatus, paymentAmmount, reservationStatus } = req.body
+    console.log(req.body)
+
+    const { userId, vehicleId, vehicleMake, vehicleModel, vehicleYear,
+        vehicleImage, startDate, endDate, paymentStatus,
+        paymentAmmount, reservationStatus } = req.body
 
     if (!userId || !vehicleId || !startDate || !endDate || !paymentStatus
-        || !paymentAmmount || !reservationStatus) {
+        || !paymentAmmount || !reservationStatus || !vehicleMake ||
+        !vehicleModel || !vehicleYear || !vehicleImage) {
         res.status(400)
         throw new Error('Add all fields')
     }
@@ -16,6 +20,10 @@ const createReservation = asyncHandler(async (req, res) => {
     const reservation = await Reservation.create({
         userId,
         vehicleId,
+        vehicleMake,
+        vehicleModel,
+        vehicleYear,
+        vehicleImage,
         startDate,
         endDate,
         paymentStatus,

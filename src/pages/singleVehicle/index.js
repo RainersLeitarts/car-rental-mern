@@ -122,6 +122,10 @@ const SingleVehiclePage = () => {
       axiosPrivate.post('http://127.0.0.1:5000/reservations/create', {
         "vehicleId": vehicle._id,
         "userId": userId,
+        "vehicleMake": vehicle.make,
+        "vehicleModel": vehicle.model,
+        "vehicleYear": vehicle.year.toString(),
+        "vehicleImage": vehicle.images,
         "startDate": startDate.toDateString(),
         "endDate": endDate.toDateString(),
         "paymentStatus": "processing",
