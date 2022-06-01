@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import useAxiosPrivate from '../../hooks/useAxiosPrivate'
+import ReservationCard from './ReservationCard/ReservationCard'
 
 
 const MyReservations = () => {
@@ -33,9 +34,9 @@ const MyReservations = () => {
         }
     }, [])
 
-    return (
-        <div>{reservations?.reservations?.map((reservation, key) => {
-            return <div>{key + 1 + ': ' + reservation._id}</div>
+    return (     
+        <div style={{width: '100%'}}>{reservations?.reservations?.map((reservation, key) => {
+            return <ReservationCard key={key} data={reservation}/>
         })}</div>
     )
 }

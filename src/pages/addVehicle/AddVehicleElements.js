@@ -2,14 +2,19 @@ import styled from 'styled-components'
 
 export const AddVehicleWrapper = styled.div`
     width: 100%;
-    height: auto;
+    height: 100vh;
     display: grid;
     align-items: center;
     justify-content: center;
     grid-template-columns: minmax(10rem, 35rem);
-    background-position: center center;
+    background-position: center;
+    background-size: cover;
     //background-attachment: fixed;
     background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(${({backgroundImage}) => backgroundImage});
+
+    @media screen and (max-width: 431px){
+        height: 100%;
+    }
 `
 
 export const AddVehicleForm = styled.form`

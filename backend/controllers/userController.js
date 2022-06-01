@@ -56,7 +56,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
         })
 
-        res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 1000 * 100000 })
+        res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 1000 * 10000000 }) //change
         res.status(201).json({
             _id: user.id,
             username: user.username,
@@ -77,7 +77,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 
     const foundUser = await User.findOne({ refreshToken })
     if (!foundUser) {
-        res.clearCookie('jwt', { httpOnly: true, maxAge: 1000 * 100000 })
+        res.clearCookie('jwt', { httpOnly: true, maxAge: 1000 * 10000000 })
         return res.sendStatus(204)
     }
 
@@ -85,7 +85,7 @@ const logoutUser = asyncHandler(async (req, res) => {
        
     })
 
-    res.clearCookie('jwt', { httpOnly: true, maxAge: 1000 * 100000 }) //use secure: true to serve only on https
+    res.clearCookie('jwt', { httpOnly: true, maxAge: 1000 * 10000000 }) //use secure: true to serve only on https
     res.send(204)
 })
 
@@ -99,7 +99,7 @@ const getMe = asyncHandler(async (req, res) => {
 const generateAccessToken = (id) => {
     return jwt.sign({ id },
         process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '1000s'
+        expiresIn: '1000s' //change
     })
 }
 
@@ -107,7 +107,7 @@ const generateAccessToken = (id) => {
 const generateRefreshToken = (id) => {
     return jwt.sign({ id },
         process.env.REFRESH_TOKEN_SECRET, {
-        expiresIn: '1000s'
+        expiresIn: '10000s' //change
     })
 }
 

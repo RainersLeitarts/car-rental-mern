@@ -17,6 +17,7 @@ const Navbar = () => {
   const dispatch = useDispatch()
 
   const accessToken = useSelector(state => state.user.user.accessToken)
+  console.log(accessToken)
   const isAdmin = useSelector(state => state.user.user.role) === 'admin' ? true : false
 
   const toggleOpen = () => {

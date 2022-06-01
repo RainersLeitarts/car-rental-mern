@@ -1,18 +1,27 @@
 import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import axios from "../api/axios"
 import { userActions } from "../store/user"
 
 const useRefreshToken = () => {
     const dispatch = useDispatch()
-    
-    const refresh = async () => {
-        const response = await axios.get('users/refresh', {
-            withCredentials: true
-        })
-        console.log(response)
-        dispatch(userActions.refreshAccessToken(response.data.accessToken))
+    const navigator = useNavigate()
 
-        return response.data.accessToken
+    const refresh = async () => {
+        try {
+            const response = await axios.get('users/refresh', {
+                withCredentials: true
+            })
+
+            dispatch(userActions.refreshAccessToken(response.data.accessToken))
+
+            return response.data.accessToken
+        } catch (error) {
+            console.log(error)
+            dispatch(userActions.removeUser())
+            navigator('/login')
+
+        }
     }
 
     return refresh

@@ -67,3 +67,4 @@ export const MeContentColumn = styled.div`
     height: 100%;
     background-color: aqua;
 `
+
