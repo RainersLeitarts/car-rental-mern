@@ -70,7 +70,6 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 const logoutUser = asyncHandler(async (req, res) => {
-    //remember to delete accessToken on the front-end
     const cookies = req.cookies
     if (!cookies?.jwt) return res.sendStatus(204)
     const refreshToken = cookies.jwt
@@ -86,11 +85,29 @@ const logoutUser = asyncHandler(async (req, res) => {
     })
 
     res.clearCookie('jwt', { httpOnly: true, maxAge: 1000 * 10000000 }) //use secure: true to serve only on https
-    res.send(204)
+    res.sendStatus(204)
+})
+
+const isAdmin = asyncHandler(async (req, res) => {
+    const cookies = req.cookies
+    if (!cookies?.jwt) return res.sendStatus(401)
+    const refreshToken = cookies.jwt
+
+    const foundUser = await User.findOne({ refreshToken })
+    if (!foundUser) {
+        return res.sendStatus(401)
+    }
+
+    if(foundUser.role !== 'admin'){
+        console.log('here')
+        return res.sendStatus(401)
+    }
+    
+
+    return res.sendStatus(204)
 })
 
 const getMe = asyncHandler(async (req, res) => {
-    console.log('here')
     const user = await User.findById(req.user.id)
     res.status(200).json(user)
 })
@@ -115,5 +132,6 @@ module.exports = {
     registerUser,
     loginUser,
     getMe,
-    logoutUser
+    logoutUser,
+    isAdmin
 }

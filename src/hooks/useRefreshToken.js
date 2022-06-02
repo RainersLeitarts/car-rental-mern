@@ -17,7 +17,7 @@ const useRefreshToken = () => {
 
             return response.data.accessToken
         } catch (error) {
-            console.log(error)
+            
             dispatch(userActions.removeUser())
             navigator('/login')
 

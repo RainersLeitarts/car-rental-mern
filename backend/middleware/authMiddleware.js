@@ -34,8 +34,6 @@ const verifyJWT = asyncHandler( async (req, res, next) => {
     const authHeader = req.headers['authorization']
     if(!authHeader) return res.sendStatus(401)
 
-    console.log(authHeader)
-
     const token = authHeader.split(' ')[1]
     jwt.verify(
         token,
@@ -47,7 +45,28 @@ const verifyJWT = asyncHandler( async (req, res, next) => {
         })
 })
 
+const isAdmin = asyncHandler( async (req, res, next) => {
+    const cookies = req.cookies
+    if (!cookies?.jwt) return res.sendStatus(401)
+    const refreshToken = cookies.jwt
+
+    const foundUser = await User.findOne({ refreshToken })
+    if (!foundUser) {
+        return res.sendStatus(401)
+    }
+
+    if(foundUser.role !== 'admin'){
+        return res.status(403).json({
+            message: 'Not an admin'
+        })
+    }
+
+    req.isAdmin = true
+    next()
+})
+
 module.exports = {
     protect,
-    verifyJWT
+    verifyJWT,
+    isAdmin
 }

@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
 const User = require('../models/user.model')
 const asyncHandler = require('express-async-handler')
 
@@ -9,7 +8,9 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
     const refreshToken = cookies.jwt
 
     const foundUser = await User.findOne({ refreshToken })
-    if (!foundUser) return res.sendStatus(403)
+    if (!foundUser) {
+        return res.sendStatus(403)
+    }
 
     jwt.verify(
         refreshToken,

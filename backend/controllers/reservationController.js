@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const Reservation = require('../models/reservations.model')
+const User = require('../models/user.model')
 
 const createReservation = asyncHandler(async (req, res) => {
     console.log(req.body)
@@ -52,7 +53,7 @@ const getByUserId = asyncHandler(async (req, res) => {
     const reservations = await Reservation.find({userId: userId.toString()})
 
     if (reservations) {
-        res.status(201).json({
+        res.status(200).json({
             reservations: reservations
         })
     } else {
@@ -62,8 +63,17 @@ const getByUserId = asyncHandler(async (req, res) => {
 
 })
 
+const getAllReservations = asyncHandler(async (req, res) => {
+    const reservations = await Reservation.find({})
+
+    res.status(200).json({
+        reservations: reservations
+    })
+})
+
 
 module.exports = {
     createReservation,
-    getByUserId
+    getByUserId,
+    getAllReservations
 }
