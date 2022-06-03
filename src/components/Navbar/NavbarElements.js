@@ -9,7 +9,7 @@ export const NavWrapper = styled.div`
     align-items: center;
     justify-content: center;
     height: 80px;
-    background-color: rgba(0,0,0,0.5) ;
+    background-color: rgba(0,0,0,0.8) ;
     backdrop-filter: blur(5px);
     z-index: 1000;
 `

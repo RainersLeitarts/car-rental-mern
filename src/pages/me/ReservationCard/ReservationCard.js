@@ -1,8 +1,8 @@
 import React from 'react'
 import { Card, Heading, DateWrapper, DateCol, DateTitle,
-  DateValue, Image, DataWrapper, PaymentStatus } from './ReservationCardElements'
+  DateValue, Image, DataWrapper, PaymentStatus, ShowUser } from './ReservationCardElements'
 
-const ReservationCard = ({ data }) => {
+const ReservationCard = ({ showUser, data }) => {
 
   const formatDate = (dateString) => {
     const date = Date.parse(dateString)
@@ -29,6 +29,7 @@ const ReservationCard = ({ data }) => {
             <DateValue>{formatDate(data.endDate)}</DateValue>
           </DateCol>
         </DateWrapper>
+        {showUser && <ShowUser>From: {data.userId}</ShowUser>}
         <PaymentStatus>Payment: {data.paymentStatus}</PaymentStatus>
       </DataWrapper>
     </Card>

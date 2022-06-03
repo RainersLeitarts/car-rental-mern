@@ -35,7 +35,11 @@ export const CarsWrapper = styled.div`
     }
 
     @media screen and (max-width: 700px) {
-        grid-template-columns: repeat(1, 250px);
+        padding: 0 1rem;
+    }
+
+    @media screen and (max-width: 550px) {
+        grid-template-columns: 1fr;
         padding: 0 1rem;
     }
 `

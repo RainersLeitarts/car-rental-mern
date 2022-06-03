@@ -2,6 +2,7 @@ import React from 'react'
 import { HomeWrapper, Hero, Heading, Paragraph, Scroll, ScrollButton, ScrollText } from './HomeElements'
 import scrollBtn from '../../images/arrow-down.svg'
 import DisplayCars from '../../components/DisplayCars'
+import Footer from '../../components/Footer/Footer'
 
 const Home = () => {
 
@@ -20,7 +21,9 @@ const Home = () => {
         </Scroll>
       </Hero>
       <DisplayCars />
+      <Footer/>
     </HomeWrapper>
+    
   )
 }
 

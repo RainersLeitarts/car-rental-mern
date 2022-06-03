@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const MeWrapper = styled.div`
     width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     transition: all 0.5s;
@@ -14,24 +15,33 @@ export const MeContent = styled.div`
     margin-left: 2rem;
     margin-right: 2rem;
     width: 100%;
-    background-color: wheat;
+    height: calc(100vh - 120px);
+    background-color: aliceblue;
     transition: all 0.5s;
     display: flex;
+    border-radius: 5px;
 
     @media screen and (max-width: 600px){
         flex-direction: column;
         margin-left: 0;
         margin-right: 0;
         margin-top: 80px;
+        height: calc(100vh);
     }
 `
 
 export const MeNavigation = styled.div`
-    background-color: aliceblue;
     padding: 20px 10px 20px 10px;
     height: calc(100vh - 120px);
     border-radius: 5px;
     width: 400px;
+
+    @media screen and (max-width: 600px){
+        height: auto;
+        width: 100%;
+        margin: 0;
+        padding: 20px 10px 0px 10px;
+    }
 `
 
 export const MeNavigationItem = styled.div`
@@ -65,6 +75,5 @@ export const MeContentColumn = styled.div`
     padding: 20px 10px 20px 10px;
     width: 100%;
     height: 100%;
-    background-color: aqua;
 `
 

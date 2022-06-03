@@ -27,7 +27,7 @@ import useAxiosPrivate from '../../hooks/useAxiosPrivate'
 //timepicker
 
 import TimeField from 'react-simple-timefield';
-import axios from 'axios';
+import Footer from '../../components/Footer/Footer';
 
 const SingleVehiclePage = () => {
   let { id } = useParams();
@@ -309,7 +309,9 @@ const SingleVehiclePage = () => {
           </ReservationWrapper>
         </RightCol>
       </ContentWrapper>
+      <Footer></Footer>
     </VehiclePageWrapper>
+    
   )
 }
 

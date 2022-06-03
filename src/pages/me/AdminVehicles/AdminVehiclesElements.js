@@ -15,7 +15,7 @@ export const Image = styled.div`
     width: 160px;
     height: 126px;
     margin-right: 20px;
-    background-color: red;
+    background-color: #0077FF;
     background-image: url(${props => props.url});
     background-position: center;
     background-size: cover;

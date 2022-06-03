@@ -5,12 +5,13 @@ import {
   MeWrapper, MeContent, MeContentColumn
 } from './MeElements'
 import MeNavigationComponent from './MeNavigation'
-import MyAccount from './MyAccount'
 import MyReservations from './MyReservations'
+import MyAccount from './MyAccount/MyAccount'
+import AdminReservations from './AdminReservartions/AdminReservations'
+import AdminVehicles from './AdminVehicles/AdminVehicles'
 
 const Me = () => {
   const [shownSection, setShownSection] = useState('myAccount')
-  const axiosPrivate = useAxiosPrivate()
 
   const handleSectionChange = (section) => {
     setShownSection(section)
@@ -23,6 +24,8 @@ const Me = () => {
         <MeContentColumn>
           {shownSection === 'myAccount' && <MyAccount />}
           {shownSection === 'myReservations' && <MyReservations />}
+          {shownSection === 'adminReservations' && <AdminReservations />}
+          {shownSection === 'adminVehicles' && <AdminVehicles />}
           
         </MeContentColumn>
       </MeContent>

@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 
+
+//!!!!!!!!!!Fix issues caused by footer
 export const VehiclePageWrapper = styled.div`
     width: 100%;
     height: 100vh;
-    display: flex;
+    display: flex; //issues caused by footer
+    
     justify-content: center;
+    align-items: center;
     transition: all 0.5s;
+    flex-direction: column;
 `
 
 export const ContentWrapper = styled.div`
     max-width: 1200px;
-    margin-top: 110px;
-    margin-bottom: 110px;
+    margin-top: 640px;
     margin-left: 2rem;
     margin-right: 2rem;
     width: 100%;
@@ -25,6 +29,18 @@ export const ContentWrapper = styled.div`
         margin-left: 0;
         margin-right: 0;
         margin-top: 80px;
+    }
+
+    @media screen and (max-width: 970px){
+        margin-top: 1340px;
+    }
+
+    @media screen and (max-width: 800px){
+        margin-top: 1140px;
+    }
+
+    @media screen and (max-width: 600px){
+        margin-top: 2100px;
     }
 `
 
