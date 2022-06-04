@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
+const path = require('path')
 
 require('dotenv').config()
 
@@ -26,9 +27,7 @@ const reservationsRouter = require('./routes/reservations')
 app.use('/cars', carsRouter)
 app.use('/users', usersRouter)
 app.use('/reservations', reservationsRouter)
-app.use('*', (req, res) => res.status(404).json({"Message": "404"}))
-
-
+//app.use('*', (req, res) => res.status(404).json({"Message": "404"}))
 
 app.listen(port, () => {
     console.log(`Server is listening on port: ${port}`)
