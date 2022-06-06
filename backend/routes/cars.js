@@ -4,7 +4,7 @@ let Car = require('../models/cars.model')
 router.route('/').get((req, res) => {
     Car.find()
         .then(cars => res.json(cars))
-        .catch(err => res.status(400).json('Error: '+ err))
+        .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/add').post((req, res) => {
@@ -21,9 +21,9 @@ router.route('/add').post((req, res) => {
     const dayprice = req.body.dayprice
     const weekprice = req.body.weekprice
     const monthprice = req.body.monthprice
+    const safetyprice = req.body.safetyprice
     const available = req.body.available
     const images = req.body.images
-
 
     const newCar = new Car({
         make,
@@ -39,25 +39,30 @@ router.route('/add').post((req, res) => {
         dayprice,
         weekprice,
         monthprice,
+        safetyprice,
         available,
         images
     })
 
     newCar.save()
         .then(() => res.json('Car added!'))
-        .catch(err => res.status(400).json('Error: '+ err))
+        .catch(err => {
+
+            res.status(400).json('Error: ' + err)
+            console.log(err)
+        })
 })
 
 router.route('/:id').get((req, res) => {
     Car.findById(req.params.id)
         .then(car => res.json(car))
-        .catch(err => res.status(400).json('Error: '+ err))
+        .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/:id').delete((req, res) => {
     Car.findByIdAndDelete(req.params.id)
         .then(() => res.json('Car deleted'))
-        .catch(err => res.status(400).json('Error: '+ err))
+        .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.route('/update/:id').post((req, res) => {
@@ -82,9 +87,9 @@ router.route('/update/:id').post((req, res) => {
 
             car.save()
                 .then(() => res.json('Car updated!'))
-                .catch(err => res.status(400).json('Error: '+ err))
+                .catch(err => res.status(400).json('Error: ' + err))
         })
-        .catch(err => res.status(400).json('Error: '+ err))
+        .catch(err => res.status(400).json('Error: ' + err))
 })
 
 

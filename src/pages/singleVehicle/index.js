@@ -119,7 +119,7 @@ const SingleVehiclePage = () => {
     if (!isLoggedIn) {
       navigator('/login')
     } else {
-      axiosPrivate.post('http://127.0.0.1:5000/reservations/create', {
+      axiosPrivate.post('https://vehicle-server-rewidle.herokuapp.com/reservations/create', {
         "vehicleId": vehicle._id,
         "userId": userId,
         "vehicleMake": vehicle.make,

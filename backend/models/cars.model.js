@@ -78,6 +78,10 @@ const carSchema = new Schema ({
         type: Number,
         required: true,
     },
+    safetyprice: {
+        type: Number,
+        required: true,
+    },
     available: {
         type: String,
         required: true,

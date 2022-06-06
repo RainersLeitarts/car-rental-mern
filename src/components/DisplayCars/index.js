@@ -16,7 +16,7 @@ const DisplayCars = () => {
       dispatch(shownCarsActions.updateCars(carsData))
     }
 
-    fetchCars({url: 'http://127.0.0.1:5000/cars'}, getCars)
+    fetchCars({url: 'http://localhost:5000/cars'}, getCars)
   }, [fetchCars])
 
   return (

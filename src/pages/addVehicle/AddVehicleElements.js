@@ -31,7 +31,7 @@ export const FormItem = styled.div`
 
 export const ItemLabel = styled.label`
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: .7rem;
     color: #fff;
 `
 
@@ -44,6 +44,20 @@ export const ItemInput = styled.input.attrs(({type}) => ({type: type}))`
     height: 1.8rem;
     border-radius: 5px;
     color: #fff;
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 1.05rem;
+`
+
+export const ItemSelect = styled.select`
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+    border: 1px solid #0077FF;
+    height: 1.8rem;
+    border-radius: 5px;
+    color: #0077FF;
     background-color: transparent;
     font-weight: 500;
     font-size: 1.05rem;
