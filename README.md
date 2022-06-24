@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Check out the current state of the project
 Demo page: https://carrentmern.netlify.app/
 
 # Getting Started with Create React App
